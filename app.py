@@ -14,7 +14,7 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "state1", "state2","show_fsm"],
+    states=["user", "state1", "state2","show_fsm","equal","larger","smaller"],
     transitions=[
         {
             "trigger": "advance",
@@ -34,15 +34,94 @@ machine = TocMachine(
             "dest": "show_fsm",
             "conditions": "is_going_to_show_fsm",
         },
-         {
+        {
             "trigger": "advance",
             "source": "state1",
             "dest": "user",
             "conditions": "is_going_to_user",
         },
-        #{"trigger": "go_back", "source": "state1", "dest": "user"},
+        {
+            "trigger": "advance",
+            "source": "show_fsm",
+            "dest": "smaller",
+            "conditions": "is_going_to_smaller",
+        },
+        {
+            "trigger": "advance",
+            "source": "show_fsm",
+            "dest": "equal",
+            "conditions": "is_going_to_equal",
+        },
+        {
+            "trigger": "advance",
+            "source": "show_fsm",
+            "dest": "larger",
+            "conditions": "is_going_to_larger",
+        },
+        {
+            "trigger": "advance",
+            "source": "smaller",
+            "dest": "smaller",
+            "conditions": "is_going_to_smaller",
+        },
+        {
+            "trigger": "advance",
+            "source": "smaller",
+            "dest": "larger",
+            "conditions": "is_going_to_larger",
+        },
+        {
+            "trigger": "advance",
+            "source": "smaller",
+            "dest": "equal",
+            "conditions": "is_going_to_equal",
+        },
+        {
+            "trigger": "advance",
+            "source": "larger",
+            "dest": "larger",
+            "conditions": "is_going_to_larger",
+        },
+        {
+            "trigger": "advance",
+            "source": "larger",
+            "dest": "equal",
+            "conditions": "is_going_to_equal",
+        },
+        {
+            "trigger": "advance",
+            "source": "larger",
+            "dest": "smaller",
+            "conditions": "is_going_to_smallerre",
+        },
+        {
+            "trigger": "advance",
+            "source": "larger",
+            "dest": "user",
+            "conditions": "restart",
+        },
+        {
+            "trigger": "advance",
+            "source": "smaller",
+            "dest": "user",
+            "conditions": "restart",
+        },
+        {
+            "trigger": "advance",
+            "source": "show_fsm",
+            "dest": "user",
+            "conditions": "restart",
+        },
+        {
+            "trigger": "advance",
+            "source": "user",
+            "dest": "user",
+            "conditions": "restart",
+        },
+        {"trigger": "go_back", "source": "state1", "dest": "user"},
         {"trigger": "go_back_state1", "source": "state2", "dest": "state1"},
-        {"trigger": "go_back_user", "source": "show_fsm", "dest": "user"}
+        {"trigger": "go_back_user", "source": "equal", "dest": "user"},
+
     ],
     initial="user",
     auto_transitions=False,
