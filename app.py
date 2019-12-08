@@ -92,7 +92,7 @@ machine = TocMachine(
             "trigger": "advance",
             "source": "larger",
             "dest": "smaller",
-            "conditions": "is_going_to_smallerre",
+            "conditions": "is_going_to_smaller",
         },
         {
             "trigger": "advance",
