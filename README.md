@@ -81,14 +81,14 @@ The initial state is set to `user`.
 		* Reply: "請輸入課程名稱"
 			* input: "{課程名稱}" ex:計算理論  (enter state2)
 				* Reply: 
-					計算理論 \\
-					教師名稱: 莊坤達 \\
-					系號:F7序號:104 \\
-					學分數:3 \\
-					時間: [3]6~8 \\
-					已選課人數:144 餘額:6 \\
-					課程地圖連結: \\
-					http://course-query.acad.ncku.edu.tw/crm/course_map/course.php?dept=F7&cono=F732000 \\
+					計算理論  <br/>
+					教師名稱: 莊坤達   <br/>
+					系號:F7序號:104  <br/>
+					學分數:3  <br/>
+					時間: [3]6~8  <br/>
+					已選課人數:144 餘額:6  <br/>
+					課程地圖連結:  <br/>
+					http://course-query.acad.ncku.edu.tw/crm/course_map/course.php?dept=F7&cono=F732000 <br/> 
 				auto back to state1
 			* input: restart   (back to user)
 	* Input: "show fsm"
@@ -164,13 +164,13 @@ sudo snap install --classic heroku
 	heroku buildpacks:set heroku/python
 	heroku buildpacks:add --index 1 heroku-community/apt
 	```
-
 	refference: https://hackmd.io/@ccw/B1Xw7E8kN?type=view#Q2-如何在-Heroku-使用-pygraphvi
-6. want to send photo
+
+6. if you want to send photo
 
 	use the {route} = show_fsm
 	enter following instruction in your terminal
-		heroku buildpacks:add https://github.com/weibeld/heroku-buildpack-graphviz
-		heroku run dot -V
-
-\\
+	```
+	heroku buildpacks:add https://github.com/weibeld/heroku-buildpack-graphviz
+	heroku run dot -V
+	```
