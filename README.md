@@ -16,7 +16,7 @@ More details in the [Slides](https://hackmd.io/@TTW/ToC-2019-Project#) and [FAQ]
 ### Prerequisite
 * Python 3.6
 * Pipenv
-* Facebook Page and App
+* Line chatbot
 * HTTPS Server
 
 #### Install Dependency
@@ -65,25 +65,43 @@ After that, `ngrok` would generate a https URL.
 python3 app.py
 ```
 
-#### b. Servo
 
-Or You can use [servo](http://serveo.net/) to expose local servers to the internet.
 
 
 ## Finite State Machine
-![fsm](./img/show-fsm.png)
+![fsm](./my_fsm.png)
 
 ## Usage
 The initial state is set to `user`.
 
-Every time `user` state is triggered to `advance` to another state, it will `go_back` to `user` state after the bot replies corresponding message.
+
 
 * user
-	* Input: "go to state1"
-		* Reply: "I'm entering state1"
-
-	* Input: "go to state2"
-		* Reply: "I'm entering state2"
+	* Input: "{系所代碼}" ex:F7   (enter state 1)
+		* Reply: "請輸入課程名稱"
+			* input: "{課程名稱}" ex:計算理論  (enter state2)
+				* Reply: 
+					計算理論
+					教師名稱: 莊坤達 
+					系號:F7序號:104
+					學分數:3
+					時間: [3]6~8
+					已選課人數:144 餘額:6
+					課程地圖連結:
+					http://course-query.acad.ncku.edu.tw/crm/course_map/course.php?dept=F7&cono=F732000
+				auto back to state1
+			* input: restart   (back to user)
+	* Input: "show fsm"
+		* Reply: "請從0~100猜一個數字"  (猜中即可看 my_fsm.png)  ex:ans=50
+			* Input: "30"
+				* Reply: "請從30~100猜一個數字" (enter start smaller)
+					* Input: "60"
+						* Reply: "請從30~60猜一個數字" (enter start larger)
+							* Input: "50"
+								* Reply:
+								![](https://github.com/liuallen871219/NCKU_Course_crawler/blob/master/my_fsm.png)
+								  auto back to user
+		
 
 ## Deploy
 Setting to deploy webhooks on Heroku.
@@ -149,11 +167,4 @@ sudo snap install --classic heroku
 
 	refference: https://hackmd.io/@ccw/B1Xw7E8kN?type=view#Q2-如何在-Heroku-使用-pygraphviz
 
-## Reference
-[Pipenv](https://medium.com/@chihsuan/pipenv-更簡單-更快速的-python-套件管理工具-135a47e504f4) ❤️ [@chihsuan](https://github.com/chihsuan)
-
-[TOC-Project-2019](https://github.com/winonecheng/TOC-Project-2019) ❤️ [@winonecheng](https://github.com/winonecheng)
-
-Flask Architecture ❤️ [@Sirius207](https://github.com/Sirius207)
-
-[Line line-bot-sdk-python](https://github.com/line/line-bot-sdk-python/tree/master/examples/flask-echo)
+\\
